@@ -4,6 +4,7 @@ namespace NTLMSoap;
 
 use \Psr\Log\LoggerAwareInterface;
 use \Psr\Log\LoggerAwareTrait;
+use \Psr\Log\LoggerInterface;
 
 class Client extends \SoapClient{
 	use LoggerAwareTrait;
@@ -17,7 +18,7 @@ class Client extends \SoapClient{
 	 * @param \Psr\Log\LoggerAwareInterface $logger
 	 * @see \SoapClient::__construct()
 	 */
-	public function __construct($url, $data, LoggerAwareInterface $logger = null){
+	public function __construct($url, $data, LoggerInterface $logger = null){
 		if($logger){
 			$this->setLogger($logger);
 		}
