@@ -73,7 +73,7 @@ class Client extends \SoapClient{
 
 		if(!empty($this->options['ntlm_username']) && !empty($this->options['ntlm_password'])){
 			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_NTLM);
-			curl_setopt($ch, CURLOPT_USERPWD, $this->NTLM_user.':'. $this->NTLM_password);
+			curl_setopt($ch, CURLOPT_USERPWD, $this->options['ntlm_username'].':'. $this->options['ntlm_password']);
 		}
 
 		$response = curl_exec($ch);
