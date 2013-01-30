@@ -33,7 +33,7 @@ class Client extends \SoapClient{
 			HttpStream\NTLM::$password = $data['ntlm_password'];
 			
 			stream_wrapper_unregister('http');
-			if(!stream_wrapper_register('http', 'HttpStream\\NTLM')){
+			if(!stream_wrapper_register('http', '\\NTLMSoap\\HttpStream\\NTLM')){
 				throw new Exception("Unable to register HTTP Handler");
 			}
 			
