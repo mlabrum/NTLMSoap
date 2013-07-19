@@ -83,15 +83,15 @@ class Client extends \SoapClient{
 		$log_func = $http_status == 200 ? 'debug' : 'error';
 		
 		// Log the call
-		$this->logger->$log_func("SoapCall: " . $action, Array(
-			"Location"				=> $location,
+		$this->logger->$log_func("SoapCall: " . $action, [
+			"Location" => $location,
 			"HttpStatus"			=> $http_status,
 			"Request"				=> $request,
-			"Response"				=> $response,
+			"Response"				=> strlen($response) > 2000 ? substr($response, 0, 2000) . "..." : $response,
 			"RequestTime"			=> curl_getinfo($ch, CURLINFO_TOTAL_TIME),
 			"RequestConnectTime"		=> curl_getinfo($ch, CURLINFO_CONNECT_TIME),
 			"Time"				=> microtime(true) - $start_time
-		));
+		]);
 		
 		return $response;
 	}
