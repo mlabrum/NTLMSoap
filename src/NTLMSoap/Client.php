@@ -63,10 +63,10 @@ class Client extends \SoapClient
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Method: POST',
-                'User-Agent: PHP-SOAP-CURL',
-                'Content-Type: text/xml; charset=utf-8',
-                'SOAPAction: "' . $action . '"',
+            'Method: POST',
+            'User-Agent: PHP-SOAP-CURL',
+            'Content-Type: text/xml; charset=utf-8',
+            'SOAPAction: "' . $action . '"',
         ));
 
         curl_setopt($ch, CURLOPT_POST, true);
