@@ -51,9 +51,9 @@ class Client extends \SoapClient
 
     }
 
-        /**
-         * @see SoapClient::__doRequest()
-         */
+    /**
+     * @see SoapClient::__doRequest()
+     */
     public function __doRequest($request, $location, $action, $version, $one_way = 0)
     {
         $this->__last_request   = $request;
