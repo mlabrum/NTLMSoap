@@ -78,20 +78,22 @@ class Client extends \SoapClient{
 
 		$response = curl_exec($ch);
 
-		// Log as an error if the curl call isn't a success
-		$http_status	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$log_func = $http_status == 200 ? 'debug' : 'error';
-		
-		// Log the call
-		$this->logger->$log_func("SoapCall: " . $action, [
-			"Location" => $location,
-			"HttpStatus"			=> $http_status,
-			"Request"				=> $request,
-			"Response"				=> strlen($response) > 2000 ? substr($response, 0, 2000) . "..." : $response,
-			"RequestTime"			=> curl_getinfo($ch, CURLINFO_TOTAL_TIME),
-			"RequestConnectTime"		=> curl_getinfo($ch, CURLINFO_CONNECT_TIME),
-			"Time"				=> microtime(true) - $start_time
-		]);
+		if(!empty($this->logger)) {
+			// Log as an error if the curl call isn't a success
+			$http_status	= curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$log_func = $http_status == 200 ? 'debug' : 'error';
+
+			// Log the call
+			$this->logger->$log_func("SoapCall: " . $action, [
+				"Location" => $location,
+				"HttpStatus"			=> $http_status,
+				"Request"				=> $request,
+				"Response"				=> strlen($response) > 2000 ? substr($response, 0, 2000) . "..." : $response,
+				"RequestTime"			=> curl_getinfo($ch, CURLINFO_TOTAL_TIME),
+				"RequestConnectTime"		=> curl_getinfo($ch, CURLINFO_CONNECT_TIME),
+				"Time"				=> microtime(true) - $start_time
+			]);
+		}
 		
 		return $response;
 	}
